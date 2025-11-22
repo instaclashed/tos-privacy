@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok OAuth Review Demo</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 40px;
+            background: #f7f7f7;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            background: #000;
+            color: #fff;
+            border: none;
+            padding: 15px 25px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>TikTok OAuth Review Demo</h2>
+        <p>Click below to login with TikTok.</p>
+        <button id="loginBtn">Login with TikTok</button>
+    </div>
+
+    <script>
+        const CLIENT_KEY = "sbawqdbrxwazebmhow";
+        const REDIRECT_URI = "review.html";
+
+        document.getElementById("loginBtn").onclick = () => {
+            const url =
+                `https://www.tiktok.com/v2/auth/authorize/` +
+                `?client_key=${encodeURIComponent(CLIENT_KEY)}` +
+                `&response_type=code` +
+                `&redirect_uri=${encodeURIComponent(REDIRECT_URI)}` +
+                `&scope=user.info.basic` +
+                `&state=xyz123`;
+
+            window.location.href = url;
+        };
+    </script>
+</body>
+
+</html>
