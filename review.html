@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TikTok OAuth Review Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            background: #f7f7f7;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        button {
+            background: #000;
+            color: #fff;
+            border: none;
+            padding: 15px 25px;
+            font-size: 18px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        #log {
+            margin-top: 25px;
+            padding: 15px;
+            font-family: monospace;
+            background: #eee;
+            border-radius: 8px;
+            min-height: 40px;
+            word-break: break-all;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>TikTok OAuth Review Demo</h2>
+        <p>This page is used only for TikTok Developer App Review.</p>
+
+        <button id="loginBtn">Login with TikTok</button>
+
+        <div id="log"></div>
+    </div>
+
+    <script>
+        const CLIENT_KEY = "aw42sxxios0qwlph"; // <-- put your TikTok app's client key
+        const REDIRECT_URI = "https://instaclashed.github.io/tos-privacy/TOS.html"; // must match TikTok settings
+
+        document.getElementById("loginBtn").onclick = () => {
+            const url =
+                `https://www.tiktok.com/v2/auth/authorize/` +
+                `?client_key=${encodeURIComponent(CLIENT_KEY)}` +
+                `&response_type=code` +
+                `&redirect_uri=${encodeURIComponent(REDIRECT_URI)}` +
+                `&scope=user.info.basic%2Cvideo.upload` +
+                `&state=xyz123`;
+
+            document.getElementById("log").innerText = "Redirecting to TikTok OAuth...";
+            window.location.href = url;
+        };
+    </script>
+</body>
+
+</html>
