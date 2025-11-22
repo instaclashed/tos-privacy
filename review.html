@@ -55,8 +55,8 @@
     </div>
 
     <script>
-        const CLIENT_KEY = "aw42sxxios0qwlph"; // <-- put your TikTok app's client key
-        const REDIRECT_URI = "https://instaclashed.github.io/tos-privacy/TOS.html"; // must match TikTok settings
+        const CLIENT_KEY = "aw42sxxios0qwlph";
+        const REDIRECT_URI = "https://instaclashed.github.io/tos-privacy/TOS.html";
 
         document.getElementById("loginBtn").onclick = () => {
             const url =
@@ -64,7 +64,7 @@
                 `?client_key=${encodeURIComponent(CLIENT_KEY)}` +
                 `&response_type=code` +
                 `&redirect_uri=${encodeURIComponent(REDIRECT_URI)}` +
-                `&scope=user.info.basic%2Cvideo.upload` +
+                `&scope=user.info.basic` +
                 `&state=xyz123`;
 
             document.getElementById("log").innerText = "Redirecting to TikTok OAuth...";
@@ -72,5 +72,6 @@
         };
     </script>
 </body>
+
 
 </html>
