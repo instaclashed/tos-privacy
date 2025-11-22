@@ -50,6 +50,7 @@
         <h2>TikTok OAuth Review Result</h2>
         <div id="log">Checking for OAuth code...</div>
         <button id="uploadBtn">Upload Video</button>
+        <input type="file" id="videoInput" accept="video/*" style="display:none">
     </div>
 
     <script>
@@ -57,6 +58,8 @@
         const code = params.get('code');
 
         const log = document.getElementById('log');
+        const uploadBtn = document.getElementById('uploadBtn');
+        const videoInput = document.getElementById('videoInput');
 
         if (code) {
             log.innerText = "OAuth successful! Code: " + code;
@@ -64,12 +67,19 @@
             log.innerText = "No code found. Please login first.";
         }
 
-        document.getElementById('uploadBtn').onclick = () => {
+        uploadBtn.onclick = () => {
             if (!code) {
                 alert("Cannot upload: no code available.");
                 return;
             }
-            log.innerText = "Uploading video to TikTok using code: " + code + " ... (demo)";
+            videoInput.click();
+        };
+
+        videoInput.onchange = () => {
+            const file = videoInput.files[0];
+            if (file) {
+                log.innerText = "Uploading video: " + file.name + " using code: " + code + " ... (demo)";
+            }
         };
     </script>
 </body>
