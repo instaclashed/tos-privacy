@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TikTok OAuth Review Demo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok OAuth Review Result</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: Arial;
             padding: 40px;
             background: #f7f7f7;
         }
@@ -18,8 +18,8 @@
             background: white;
             padding: 30px;
             border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         button {
@@ -30,6 +30,7 @@
             font-size: 18px;
             border-radius: 10px;
             cursor: pointer;
+            margin-top: 20px;
         }
 
         #log {
@@ -46,33 +47,31 @@
 
 <body>
     <div class="container">
-        <h2>TikTok OAuth Review Demo</h2>
-        <p>This page is used only for TikTok Developer App Review.</p>
-
-        <button id="loginBtn">Login with TikTok</button>
-
-        <div id="log"></div>
+        <h2>TikTok OAuth Review Result</h2>
+        <div id="log">Checking for OAuth code...</div>
+        <button id="uploadBtn">Upload Video</button>
     </div>
 
     <script>
-        const CLIENT_KEY = "sbawqdbrxwazebmhow";
-        const REDIRECT_URI = "https://instaclashed.github.io/tos-privacy/TOS.html";
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get('code');
 
-        document.getElementById("loginBtn").onclick = () => {
-            const url =
-                `https://www.tiktok.com/v2/auth/authorize/` +
-                `?client_key=${encodeURIComponent(CLIENT_KEY)}` +
-                `&response_type=code` +
-                `&redirect_uri=${encodeURIComponent(REDIRECT_URI)}` +
-                `&scope=user.info.basic` +
-                `&state=xyz123`;
+        const log = document.getElementById('log');
 
-            document.getElementById("log").innerText = "Redirecting to TikTok OAuth...";
-            window.location.href = url;
+        if (code) {
+            log.innerText = "OAuth successful! Code: " + code;
+        } else {
+            log.innerText = "No code found. Please login first.";
+        }
+
+        document.getElementById('uploadBtn').onclick = () => {
+            if (!code) {
+                alert("Cannot upload: no code available.");
+                return;
+            }
+            log.innerText = "Uploading video to TikTok using code: " + code + " ... (demo)";
         };
     </script>
 </body>
 
-
 </html>
-
